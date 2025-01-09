@@ -24,6 +24,30 @@ username_field.send_keys('sel-username')
 password_field.send_keys('SelPassword123$')
 driver.execute_script("arguments[0].click();", login_button)
 
+# Locate the Elements dropdown and text box
+elements = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="app"]/div/div/'
+                                                                                       'div/div[1]/div/div/'
+                                                                                       'div[1]/span/div')))
+elements.click()
+
+textbox = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, 'item-0')))
+textbox.click()
+
+# Locate the form fields and submit button
+fullname_field = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, 'userName')))
+email_field = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, 'userEmail')))
+current_address_field = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, 'currentAddress')))
+permanent_address_field = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, 'permanentAddress')))
+submit_button = driver.find_element(By.ID, 'submit')
+
+# Fill in form fields
+fullname_field.send_keys('John Cena')
+email_field.send_keys('john.cena@gmail.com')
+current_address_field.send_keys('Cena Street, West Newbury, Massachusetts, USA')
+permanent_address_field.send_keys('Cena Street, West Newbury, Massachusetts, USA')
+
+driver.execute_script("arguments[0].click();", submit_button)
+
 # Conditions to close the browser
 input("Press Enter to close the Browser")
 driver.quit()
