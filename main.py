@@ -63,23 +63,22 @@ class WebAutomation:
 
     def download(self):
         # Locate upload and download
-        updown_field = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.ID, "item-7")))
-        updown_field.click()
+        updown_field = self.driver.find_element((By.ID, 'item-7'))
+        self.driver.execute_script("arguments[0].click();", updown_field)
 
         # Click download button
         download_button = self.driver.find_element(By.ID, 'downloadButton')
         self.driver.execute_script("arguments[0].click();", download_button)
 
     def close(self):
-        # Conditions to close the browser
-        input("Press Enter to close the Browser")
         self.driver.quit()
 
 
-webautomation = WebAutomation()
-webautomation.login('sel-username', 'SelPassword123')
-webautomation.fill_form('John Cena', 'john.cena@gmail.com',
-                        'Cena Street, West Newbury, Massachusetts, USA',
-                        'Cena Street, West Newbury, Massachusetts, USA')
-webautomation.download()
-webautomation.close()
+if __name__ == "__main__":
+    webautomation = WebAutomation()
+    webautomation.login('sel-username', 'SelPassword123')
+    webautomation.fill_form('John Cena', 'john.cena@gmail.com',
+                            'Cena Street, West Newbury, Massachusetts, USA',
+                            'Cena Street, West Newbury, Massachusetts, USA')
+    webautomation.download()
+    webautomation.close()
